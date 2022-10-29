@@ -81,7 +81,7 @@ class App{
             color: 0xffffff, side: THREE.BackSide
         }));
         this.highlight.scale.set(1.2, 1.2, 1.2);
-        this.scene.add(highlight);
+        this.scene.add(this.highlight);
         
     }
     
@@ -104,6 +104,11 @@ class App{
             self.highlight.visible = false;
             this.userData.selectPressed = false;
         }
+
+        this.controllers.forEach((controller)=>{
+            controller.addEventListener('selectstart', onSelectStart);
+            controller.addEventListener('selectend', onSelectEnd);
+        })
         
     }
     
@@ -137,7 +142,24 @@ class App{
     }
     
     handleController( controller ){
-        
+        if(controller.userData.selectPressed){
+            controller.children[0].scale.z = 10;
+
+            this.workingMatrix.identity().extractRotation(controller.matrixWorld);
+
+            this.raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);
+            this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.workingMatrix);
+
+            const intersects = this.raycaster.intersectObjects(this.room.children);
+
+            if(intersects.length > 0){
+                intersects[0].object.add(this.highlight);
+                this.highlight.visible = true;
+                controller.children[0].scale.z = intersects[0].distance;
+            }else{
+                this.highlight.visible = false;
+            }
+        }
     }
     
     resize(){
