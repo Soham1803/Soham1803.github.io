@@ -137,7 +137,7 @@ class App{
        
         const inputSource = session.inputSource[0];
 
-        if(inputSource && inputSource.gamepad && inputSource.gamepadIndices && this.ui && this.buttonStates){
+        if(inputSource && inputSource.gamepad && this.gamepadIndices && this.ui && this.buttonStates){
             const gamepad = inputSource.gamepad;
             try{
                 Object.entries(this.buttonStates).forEach(([key, value])=>{
@@ -179,13 +179,11 @@ class App{
                         components[component.rootNodeName] = component.gamepadIndices; 
                     });
                     info[key] = components;
-                }
-
-            );
+                });
 
                 self.createButtonStates(info.right);
                 self.updateControllers(info);
-            })
+            });
             console.log(info);
         }
          
