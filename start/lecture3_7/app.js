@@ -89,7 +89,13 @@ class App{
                 this.colliders.push(box);
             }
         }
-        
+        this.dolly = new THREE.Object3D();
+        this.dolly.position.z = 5;
+        this.dolly.add(this.camera);
+        this.scene.add(this.dolly);
+
+        this.dummyCam = new THREE.Object3D();
+        this.camera.add(this.dummyCam);
         
     } 
     
