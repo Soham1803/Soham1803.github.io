@@ -206,7 +206,8 @@ class App{
 
             intersect = this.raycaster.intersectObjects(this.colliders);
             if (intersect.length>0){
-                if (intersect[0].distance<wallLimit) this.dolly.translateX(wallLimit-intersect[0].distance);
+                if (intersect[0].distance<wallLimit) 
+                    this.dolly.translateX(wallLimit-intersect[0].distance);
             }
 
             //cast right
@@ -217,7 +218,8 @@ class App{
 
             intersect = this.raycaster.intersectObjects(this.colliders);
             if (intersect.length>0){
-                if (intersect[0].distance<wallLimit) this.dolly.translateX(intersect[0].distance-wallLimit);
+                if (intersect[0].distance<wallLimit) 
+                    this.dolly.translateX(intersect[0].distance-wallLimit);
             }
 
             this.dolly.position.y = 0;
