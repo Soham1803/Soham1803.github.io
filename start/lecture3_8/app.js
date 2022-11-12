@@ -70,15 +70,63 @@ class App{
     }
     
     initPhysics(){
+        this.world = new CANNON.World();
+
+        this.timeStep = 1.0/60.0;
+        this.damping = 0.01;
+
+        this.world.broadphase = new CANNON.NaiveBroadphase();
+        this.world.gravity.set(0, -10, 0);
+
+        this.helper = new CannonHelper(this.scene, this.world);
+
+        const groundShape = new CANNON.Plane();
+        const groundBody = new CANNON.Body({mass: 0});
+        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI/2);
         
+        groundBody.addShape(groundShape);
+        this.world.add(groundBody);
+        this.helper.addVisual(groundBody, 0xffaa00);
+
+        const shape = new CANNON.Sphere(0.1);
+        this.jointBody= new CANNON.Body({mass: 0});
+        this.jointBody.addShape(shape);
+        this.jointBody.collisionFilterGroup = 0;
+        this.jointBody.collisionFilterMask = 0;
+        this.world.add(this.jointBody);
+
+        this.box = this.addBody();
     }  
     
     addBody(box=true){
+        let shape;
         
+        if(!box){
+            shape = new CANNON.Sphere(0.5);
+        }else{
+            shape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
+        }
+        const material = new CANNON.Material();
+        const body = new CANNON.Body({mass: 5, material: material});
+        body.addShape(shape);
+
+        body.position.set(0, 1, -3);
+        body.linearDamping = this.damping;
+        this.world.add(body);
+
+        this.helper.addVisual(body);
+        return body;
     }
     
     addConstraint(pos, body){
-        
+        const pivot = pos.clone();
+        body.threemesh.worldToLocal(pivot);
+        this.jointBody.position.copy(pos);
+
+        const constraint = new CANNON.PointToPointConstraint(body, pivot, this.jointBody, new CANNON.Vec3(0, 0, 0));
+
+        this.world.addConstraint(constraint);
+        this.controller.userData.constraint = constraint;
     }
     
     setupXR(){
