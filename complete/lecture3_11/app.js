@@ -61,10 +61,10 @@ class App{
 		// Load a GLTF resource
 		loader.load(
 			// resource URL
-			`knight2.glb`,
+			`Dynamite-by-me.glb`,
 			// called when the resource is loaded
 			function ( gltf ) {
-				const object = gltf.scene.children[5];
+				const object = gltf.scene.children[0];
                 console.log(gltf.scene.children);
 				
 				object.traverse(function(child){
@@ -103,6 +103,7 @@ class App{
 			function ( error ) {
 
 				console.log( 'An error happened' );
+                console.log(error);
 
 			}
 		);
