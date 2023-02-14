@@ -69,6 +69,7 @@ class App{
                 console.log(gltf.animations);
 				
 				object.traverse(function(child){
+                    console.log(child);
 					if (child.isMesh){
                         child.material.metalness = 0;
                         child.material.roughness = 1;
