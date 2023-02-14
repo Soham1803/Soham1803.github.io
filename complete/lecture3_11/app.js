@@ -65,7 +65,7 @@ class App{
 			// called when the resource is loaded
 			function ( gltf ) {
 				const object = gltf.scene.children[0];
-                console.log(gltf.scene.children);
+                console.log(gltf.scene);
                 console.log(gltf.animations);
 				
 				object.traverse(function(child){
@@ -81,7 +81,7 @@ class App{
 					animations: gltf.animations,
 					clip: gltf.animations[0],
 					app: self,
-					name: 'soham',
+					name: 'YouCut_20230211_204607246',
 					npc: false
 				};
 				
