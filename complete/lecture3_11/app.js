@@ -88,7 +88,7 @@ class App{
 				self.soham = new Player(options);
                 self.soham.object.visible = false;
 				
-				self.soham.action = 'Dance';
+				self.soham.action = 'YouCut_20230211_204607246';
 				const scale = 0.003;
 				self.soham.object.scale.set(scale, scale, scale); 
 				
