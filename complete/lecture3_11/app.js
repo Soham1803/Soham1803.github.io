@@ -102,25 +102,25 @@ class App{
 			function ( gltf ) {
 				const object = gltf.scene.children[0];
 
-                object.getObjectByName('Wolf3D_Body').material =new THREE.MeshStandardMaterial(self.textureDesigns[0]);
+                // object.getObjectByName('Wolf3D_Body').material =new THREE.MeshStandardMaterial(self.textureDesigns[0]);
                 
-                object.getObjectByName('Wolf3D_Glasses').material = new THREE.MeshStandardMaterial(self.textureDesigns[1]);
+                // object.getObjectByName('Wolf3D_Glasses').material = new THREE.MeshStandardMaterial(self.textureDesigns[1]);
                 
-                object.getObjectByName('Wolf3D_Hair').material = new THREE.MeshStandardMaterial(self.textureDesigns[2]);
+                // object.getObjectByName('Wolf3D_Hair').material = new THREE.MeshStandardMaterial(self.textureDesigns[2]);
             
-                object.getObjectByName('Wolf3D_Outfit_Bottom').material = new THREE.MeshStandardMaterial(self.textureDesigns[3]);
+                // object.getObjectByName('Wolf3D_Outfit_Bottom').material = new THREE.MeshStandardMaterial(self.textureDesigns[3]);
             
-                object.getObjectByName('Wolf3D_Outfit_Footwear').material = new THREE.MeshStandardMaterial(self.textureDesigns[4]);
+                // object.getObjectByName('Wolf3D_Outfit_Footwear').material = new THREE.MeshStandardMaterial(self.textureDesigns[4]);
                 
-                object.getObjectByName('Wolf3D_Outfit_Top').material = new THREE.MeshStandardMaterial(self.textureDesigns[5]);
+                // object.getObjectByName('Wolf3D_Outfit_Top').material = new THREE.MeshStandardMaterial(self.textureDesigns[5]);
                 
-                object.getObjectByName('EyeLeft').material = new THREE.MeshStandardMaterial(self.textureDesigns[6]);
+                // object.getObjectByName('EyeLeft').material = new THREE.MeshStandardMaterial(self.textureDesigns[6]);
 
-                object.getObjectByName('EyeRight').material = new THREE.MeshStandardMaterial(self.textureDesigns[7]);
+                // object.getObjectByName('EyeRight').material = new THREE.MeshStandardMaterial(self.textureDesigns[7]);
 
-                object.getObjectByName('Wolf3D_Head').material = new THREE.MeshStandardMaterial(self.textureDesigns[8]);
+                // object.getObjectByName('Wolf3D_Head').material = new THREE.MeshStandardMaterial(self.textureDesigns[8]);
 
-                object.getObjectByName('Wolf3D_Teeth').material = new THREE.MeshStandardMaterial(self.textureDesigns[9]);
+                // object.getObjectByName('Wolf3D_Teeth').material = new THREE.MeshStandardMaterial(self.textureDesigns[9]);
 
 				
 				object.traverse(function(child){
@@ -131,6 +131,7 @@ class App{
 					}
 				});
 				
+                console.log(gltf.animations);
 				const options = {
 					object: object,
 					speed: 0.5,
