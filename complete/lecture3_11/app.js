@@ -7,6 +7,7 @@ import { ARButton } from '../../libs/ARButton.js';
 import { LoadingBar } from '../../libs/LoadingBar.js';
 import { Player } from '../../libs/three125/Player.js';
 import { ControllerGestures } from '../../libs/three125/ControllerGestures.js'; 
+import { DRACOLoader } from '../../libs/three124/jsm/DRACOLoader.js';
 
 class App{
 	constructor(){
@@ -54,74 +55,56 @@ class App{
     initScene(){
         this.loadingBar = new LoadingBar();
 
-        this.textureAssetsPath = '../../assets/textures/dynamite/';
-        const textureLoader = new THREE.TextureLoader().setPath(this.textureAssetsPath);
+    //     this.textureAssetsPath = '../../assets/textures/dynamite/';
+    //     const textureLoader = new THREE.TextureLoader().setPath(this.textureAssetsPath);
 
 
-        const hoodie_color = textureLoader.load('hoodie.jpg');
-        const hoodie_normal = textureLoader.load('normal_texture.jpg')
-        const hoodie_metal = textureLoader.load('hoodie_shine.jpg')
-        const pants_color = textureLoader.load('pants.jpg');
-        const pants_normal = textureLoader.load('pant-normal.jpg');
-        const pants_metal = textureLoader.load('pant-shine.jpg');
-        const shoes_color = textureLoader.load('shoes.jpg');
-        const shoes_normal = textureLoader.load('shoes-normal.jpg');
-        const shoes_metal = textureLoader.load('shoes-shine.jpg');
-        const face = textureLoader.load('nose-mouth.jpg');
-        const eye = textureLoader.load('eye-left.jpg');
-        const glasses = textureLoader.load('glasses.jpg');
-        const hair_color = textureLoader.load('hair-texture.jpg');
-        const hair_normal = textureLoader.load('hair_normal.jpg');
-        const body_color = textureLoader.load('lips.jpg');
-        const body_normal = textureLoader.load('body-normal-texture.jpg');
-        const teeth = textureLoader.load('teeth.jpg');
+    //     const hoodie_color = textureLoader.load('hoodie.jpg');
+    //     const hoodie_normal = textureLoader.load('normal_texture.jpg')
+    //     const hoodie_metal = textureLoader.load('hoodie_shine.jpg')
+    //     const pants_color = textureLoader.load('pants.jpg');
+    //     const pants_normal = textureLoader.load('pant-normal.jpg');
+    //     const pants_metal = textureLoader.load('pant-shine.jpg');
+    //     const shoes_color = textureLoader.load('shoes.jpg');
+    //     const shoes_normal = textureLoader.load('shoes-normal.jpg');
+    //     const shoes_metal = textureLoader.load('shoes-shine.jpg');
+    //     const face = textureLoader.load('nose-mouth.jpg');
+    //     const eye = textureLoader.load('eye-left.jpg');
+    //     const glasses = textureLoader.load('glasses.jpg');
+    //     const hair_color = textureLoader.load('hair-texture.jpg');
+    //     const hair_normal = textureLoader.load('hair_normal.jpg');
+    //     const body_color = textureLoader.load('lips.jpg');
+    //     const body_normal = textureLoader.load('body-normal-texture.jpg');
+    //     const teeth = textureLoader.load('teeth.jpg');
 
-        this.textureDesigns = [
-            {map: body_color, normalMap: body_normal, metalnessMap: null},
-            {map: glasses, normalMap: null, metalnessMap: null},
-            {map: hair_color, normalMap: hair_normal, metalnessMap: null},
-            {map: pants_color, normalMap: pants_normal, metalnessMap: pants_metal},
-            {map: shoes_color, normalMap: shoes_normal, metalnessMap: shoes_metal},
-            {map: hoodie_color, normalMap: hoodie_normal, metalnessMap: hoodie_metal},
-            {map: eye, normalMap: null, metalnessMap: null},
-            {map: eye, normalMap: null, metalnessMap: null},
-            {map: face, normalMap: null, metalnessMap: null},
-            {map: teeth, normalMap: null, metalnessMap: null}
+    //     this.textureDesigns = [
+    //         {map: body_color, normalMap: body_normal, metalnessMap: null},
+    //         {map: glasses, normalMap: null, metalnessMap: null},
+    //         {map: hair_color, normalMap: hair_normal, metalnessMap: null},
+    //         {map: pants_color, normalMap: pants_normal, metalnessMap: pants_metal},
+    //         {map: shoes_color, normalMap: shoes_normal, metalnessMap: shoes_metal},
+    //         {map: hoodie_color, normalMap: hoodie_normal, metalnessMap: hoodie_metal},
+    //         {map: eye, normalMap: null, metalnessMap: null},
+    //         {map: eye, normalMap: null, metalnessMap: null},
+    //         {map: face, normalMap: null, metalnessMap: null},
+    //         {map: teeth, normalMap: null, metalnessMap: null}
 
-    ]
+    // ]
         
         this.assetsPath = '../../assets/';
         const loader = new GLTFLoader().setPath(this.assetsPath);
-		const self = this;
-		
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath( '../../libs/three/js/draco/' );
+        loader.setDRACOLoader( dracoLoader );
+        const self = this;
+				
 		// Load a GLTF resource
 		loader.load(
 			// resource URL
-			`Dynamite-by-me.glb`,
+			`Dynamite by me.glb`,
 			// called when the resource is loaded
 			function ( gltf ) {
 				const object = gltf.scene.children[0];
-
-                // object.getObjectByName('Wolf3D_Body').material =new THREE.MeshStandardMaterial(self.textureDesigns[0]);
-                
-                // object.getObjectByName('Wolf3D_Glasses').material = new THREE.MeshStandardMaterial(self.textureDesigns[1]);
-                
-                // object.getObjectByName('Wolf3D_Hair').material = new THREE.MeshStandardMaterial(self.textureDesigns[2]);
-            
-                // object.getObjectByName('Wolf3D_Outfit_Bottom').material = new THREE.MeshStandardMaterial(self.textureDesigns[3]);
-            
-                // object.getObjectByName('Wolf3D_Outfit_Footwear').material = new THREE.MeshStandardMaterial(self.textureDesigns[4]);
-                
-                // object.getObjectByName('Wolf3D_Outfit_Top').material = new THREE.MeshStandardMaterial(self.textureDesigns[5]);
-                
-                // object.getObjectByName('EyeLeft').material = new THREE.MeshStandardMaterial(self.textureDesigns[6]);
-
-                // object.getObjectByName('EyeRight').material = new THREE.MeshStandardMaterial(self.textureDesigns[7]);
-
-                // object.getObjectByName('Wolf3D_Head').material = new THREE.MeshStandardMaterial(self.textureDesigns[8]);
-
-                // object.getObjectByName('Wolf3D_Teeth').material = new THREE.MeshStandardMaterial(self.textureDesigns[9]);
-
 				
 				object.traverse(function(child){
                     

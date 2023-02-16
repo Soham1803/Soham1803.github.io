@@ -62,13 +62,14 @@ class App{
     }
     
     loadGLTF(){
-        const loader = new GLTFLoader( ).setPath('../../assets/');
+        this.assetsPath = '../../assets/';
+        const loader = new GLTFLoader().setPath(this.assetsPath);
         const self = this;
 		
 		// Load a glTF resource
 		loader.load(
 			// resource URL
-			'office-chair.glb',
+			'chair.glb',
 			// called when the resource is loaded
 			function ( gltf ) {
                 const bbox = new THREE.Box3().setFromObject( gltf.scene );
