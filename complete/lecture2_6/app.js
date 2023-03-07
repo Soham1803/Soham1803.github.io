@@ -4,6 +4,7 @@ import { FBXLoader } from '../../libs/three/jsm/FBXLoader.js';
 import { RGBELoader } from '../../libs/three/jsm/RGBELoader.js';
 import { OrbitControls } from '../../libs/three/jsm/OrbitControls.js';
 import { LoadingBar } from '../../libs/LoadingBar.js';
+import { DRACOLoader } from '../../libs/three124/jsm/DRACOLoader.js';
 
 class App{
 	constructor(){
@@ -64,12 +65,15 @@ class App{
     loadGLTF(){
         this.assetsPath = '../../assets/';
         const loader = new GLTFLoader().setPath(this.assetsPath);
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath( '../../libs/three/js/draco/' );
+        loader.setDRACOLoader( dracoLoader );
         const self = this;
 		
 		// Load a glTF resource
 		loader.load(
 			// resource URL
-			'chair.glb',
+			'scene.glb',
 			// called when the resource is loaded
 			function ( gltf ) {
                 const bbox = new THREE.Box3().setFromObject( gltf.scene );
@@ -98,6 +102,7 @@ class App{
 			function ( error ) {
 
 				console.log( 'An error happened' );
+                console.error(error);
 
 			}  
         );
